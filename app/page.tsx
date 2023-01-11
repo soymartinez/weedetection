@@ -7,6 +7,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Home() {
   const [modal, setModal] = useState(false)
+  const [image, setImage] = useState(null)
+  const [preview, setPreview] = useState('')
+
+  const handleImage = (e: any) => {
+    const file = e.target.files[0]
+    setImage(file)
+    setPreview(URL.createObjectURL(file))
+    setModal(false)
+  }
+
   return (
     <main className={`bg-black/10`}>
       <div className={`h-screenn`}>
@@ -26,7 +36,7 @@ export default function Home() {
           <label onClick={() => setModal(!modal)}>
             <Camera className='text-white w-28 md:w-48 cursor-pointer' />
           </label>
-          <input hidden type={'file'} accept={'.png, .jpg, .jpeg'} id='upload' />
+          <input hidden onChange={(e) => handleImage(e)} type={'file'} accept={'.png, .jpg, .jpeg'} id='upload' />
           <h3 className='text-primary text-3xl font-black mt-8'>Toma una foto</h3>
         </section>
         <AnimatePresence initial={false}>
