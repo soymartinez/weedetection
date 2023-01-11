@@ -13,3 +13,19 @@ export function Camera({ className }: { className?: string }) {
         </svg>
     )
 }
+
+export function Arrow({ className }: { className?: string }) {
+    return (
+        <svg
+            className={className}
+            fill='currentColor'
+            viewBox="0 0 120 120"
+            xmlSpace="preserve"
+        >
+            <path d="M102.296 59.957 42.264 119.99l-16.659-16.65 60.034-60.041z"
+            />
+            <path d="M85.74 76.71 25.715 16.653 42.373.011l60.018 60.056z"
+            />
+        </svg>
+    )
+}
