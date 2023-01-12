@@ -21,12 +21,24 @@ export default function Home() {
     <main className={`bg-black/10`}>
       <div className={`h-screenn`}>
         <section className={`bg-primary flex flex-col items-center overflow-hidden text-center py-5 px-2 rounded-b-3xl`}>
-          <Image
-            src={`/logo.png`}
-            alt={`Weedetection`}
-            width={120}
-            height={120}
-          />
+          <motion.div
+            animate={{
+              y: image ? '-15vh' : 0,
+              opacity: image ? 0 : 1,
+              height: image ? 0 : 'auto',
+            }}
+            transition={{
+              duration: 0.8,
+              type: 'spring',
+            }}
+          >
+            <Image
+              src={`/logo.png`}
+              alt={`Weedetection`}
+              width={120}
+              height={120}
+            />
+          </motion.div>
           <h1 className='text-4xl font-black mt-2'>Weedetection</h1>
           <h3 className='text-2xl font-black mt-3'>¿Qué cepa deseas escanear?</h3>
           <input className='outline-primary w-10/12 h-12 mt-3 px-4 rounded-2xl' type='text' />
