@@ -39,10 +39,83 @@ export default function Home() {
               height={120}
             />
           </motion.div>
-          <h1 className='text-4xl font-black mt-2'>Weedetection</h1>
-          <h3 className='text-2xl font-black mt-3'>¿Qué cepa deseas escanear?</h3>
-          <input className='outline-primary w-10/12 h-12 mt-3 px-4 rounded-2xl' type='text' />
-          <div className='bg-white h-1 w-2/5 mt-3 rounded-full' />
+          <motion.div
+            className={'flex flex-col -space-y-3'}
+            initial={{
+              fontSize: '2.25rem',
+              margin: '0.5rem 0 0',
+            }}
+            animate={{
+              margin: image ? '1rem 0 0' : '0.5rem 0 0',
+              fontSize: image ? '1.575rem' : '2.25rem',
+              textAlign: image ? 'left' : 'center',
+              width: image ? '83.333333%' : 'auto',
+            }}
+            transition={{
+              duration: 0.3,
+              type: 'spring',
+              delay: 0.3,
+            }}
+          >
+            <h1>Weedetection</h1>
+            <motion.span
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: image ? 1 : 0,
+                height: image ? 'auto' : 0,
+              }}
+              transition={{
+                duration: 0.8,
+                type: 'spring',
+              }}
+              className={`text-base ml-4 font-black text-white transition-opacity`}>
+              By la cara del cannabis
+            </motion.span>
+          </motion.div>
+          <motion.h3
+            initial={{ margin: '1.25rem 0 0' }}
+            animate={{
+              opacity: image ? 0 : 1,
+              height: image ? 0 : 'auto',
+              margin: image ? 0 : '1.25rem 0 0',
+            }}
+            transition={{
+              duration: 0.8,
+              type: 'spring',
+            }}
+            className={`text-2xl font-black transition-opacity`}>¿Qué cepa deseas escanear?</motion.h3>
+          <motion.input
+            initial={{ opacity: 1, height: '3rem', margin: '1.25rem 0 0' }}
+            animate={{
+              opacity: image ? 0 : 1,
+              height: image ? 0 : '3rem',
+              margin: image ? 0 : '1.25rem 0 0',
+            }}
+            transition={{
+              duration: 0.3,
+              type: 'spring',
+            }}
+            className='outline-primary w-10/12 h-12 mt-3 px-4 rounded-2xl' type='text' />
+          <motion.div
+            style={{ width: '40%', height: '0.25rem', borderRadius: '1rem', padding: 0 }}
+            animate={{
+              borderRadius: '1.5rem',
+              height: image ? 'auto' : '0.25rem',
+              width: image ? '83.333333%' : '40%',
+              padding: image ? '1rem' : 0,
+            }}
+            transition={{
+              duration: 0.8,
+              type: 'spring',
+              delay: 0.3,
+            }}
+            className='bg-white mt-3 text-start overflow-hidden'>
+            <h1 className='text-xl'>Creo que:</h1>
+            <div className='px-2'>
+              <h2 className='text-lg'>Tipo de cultivo:</h2>
+              <h2 className='text-lg'>Calificación:</h2>
+            </div>
+          </motion.div>
         </section>
         <section className='flex flex-col items-center justify-center min-h-[365px]'>
           <label onClick={() => setModal(!modal)}>
