@@ -140,12 +140,44 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-        <section className='flex flex-col items-center justify-center min-h-[365px]'>
-          <label onClick={() => setModal(!modal)}>
-            <Camera className='text-white w-28 md:w-48 cursor-pointer' />
-          </label>
-          <input hidden onChange={(e) => handleImage(e)} type={'file'} accept={'.png, .jpg, .jpeg'} id='upload' />
-          <h3 className='text-primary text-3xl font-black mt-8'>Toma una foto</h3>
+        <section className={`flex flex-col items-center relative ${image ? 'min-h-[465px] pt-32 justify-center' : 'min-h-[365px] justify-center'}`}>
+          {preview ?
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                type: 'spring',
+              }}
+              className='flex flex-col items-center justify-center relative w-4/6'>
+              <div className='absolute inset-y-5 z-20 rounded-full w-full h-1 bg-primary drop-shadow-[0_0_20px_#4cffa3] animate-scan-line' />
+              <motion.img
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: '300px' }}
+                transition={{
+                  duration: 0.8,
+                  type: 'spring',
+                }}
+                className={`w-4/5 py-4 object-contain grayscale`} src={preview} />
+              <div className='absolute w-4/5 top-0 overflow-hidden animate-scan'>
+                <motion.img
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: '300px' }}
+                  transition={{
+                    duration: 0.8,
+                    type: 'spring',
+                  }}
+                  className={`object-contain py-4 mx-auto`} src={preview} />
+              </div>
+            </motion.div>
+            : <>
+              <label onClick={() => setModal(!modal)}>
+                <Camera className='text-white w-28 md:w-48 cursor-pointer' />
+              </label>
+              <input hidden onChange={(e) => handleImage(e)} type={'file'} accept={'.png, .jpg, .jpeg'} id='upload' />
+              <h3 className='text-primary text-3xl font-black mt-8'>Toma una foto</h3>
+            </>
+          }
         </section>
         <AnimatePresence initial={false}>
           <motion.section
