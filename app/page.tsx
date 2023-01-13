@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import { Camera, Arrow } from 'components/icons'
+import { Camera, Arrow, Cannabis } from 'components/icons'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <main className={`bg-black/10`}>
       <div className={`h-screenn`}>
-        <section className={`bg-primary flex flex-col items-center overflow-hidden text-center py-5 px-2 rounded-b-3xl`}>
+        <section className={`bg-primary flex flex-col items-center text-center py-5 px-2 rounded-b-3xl`}>
           <motion.div
             animate={{
               y: image ? '-15vh' : 0,
@@ -43,18 +43,19 @@ export default function Home() {
             className={'flex flex-col -space-y-3'}
             initial={{
               fontSize: '2.25rem',
+              textAlign: 'center',
+              width: '100%',
               margin: '0.5rem 0 0',
             }}
             animate={{
-              margin: image ? '1rem 0 0' : '0.5rem 0 0',
               fontSize: image ? '1.575rem' : '2.25rem',
-              textAlign: image ? 'left' : 'center',
-              width: image ? '83.333333%' : 'auto',
+              textAlign: image ? 'start' : 'center',
+              width: image ? '83.333333%' : '100%',
+              margin: image ? '1rem 0 0' : '0.5rem 0 0',
             }}
             transition={{
-              duration: 0.3,
+              duration: 0.8,
               type: 'spring',
-              delay: 0.3,
             }}
           >
             <h1>Weedetection</h1>
@@ -84,38 +85,60 @@ export default function Home() {
               type: 'spring',
             }}
             className={`text-2xl font-black transition-opacity`}>¿Qué cepa deseas escanear?</motion.h3>
-          <motion.input
-            initial={{ opacity: 1, height: '3rem', margin: '1.25rem 0 0' }}
-            animate={{
-              opacity: image ? 0 : 1,
-              height: image ? 0 : '3rem',
-              margin: image ? 0 : '1.25rem 0 0',
-            }}
-            transition={{
-              duration: 0.3,
-              type: 'spring',
-            }}
-            className='outline-primary w-10/12 h-12 mt-3 px-4 rounded-2xl' type='text' />
-          <motion.div
-            style={{ width: '40%', height: '0.25rem', borderRadius: '1rem', padding: 0 }}
-            animate={{
-              borderRadius: '1.5rem',
-              height: image ? 'auto' : '0.25rem',
-              width: image ? '83.333333%' : '40%',
-              padding: image ? '1rem' : 0,
-            }}
-            transition={{
-              duration: 0.8,
-              type: 'spring',
-              delay: 0.3,
-            }}
-            className='bg-white mt-3 text-start overflow-hidden'>
-            <h1 className='text-xl'>Creo que:</h1>
-            <div className='px-2'>
-              <h2 className='text-lg'>Tipo de cultivo:</h2>
-              <h2 className='text-lg'>Calificación:</h2>
-            </div>
-          </motion.div>
+          <div className='w-full relative mt-3 flex flex-col justify-center items-center'>
+            <motion.input
+              initial={{ opacity: 1 }}
+              animate={{
+                opacity: image ? 0 : 1,
+              }}
+              transition={{
+                duration: 0.8,
+                type: 'spring',
+              }}
+              className='outline-primary w-10/12 h-12 px-4 rounded-2xl' type='text' />
+            <motion.div
+              layout
+              initial={{
+                borderRadius: '1.5rem',
+                height: '0.25rem',
+                width: '40%',
+                margin: '0.75rem 0 0',
+              }}
+              animate={{
+                borderRadius: image ? '1.5rem' : 50,
+                height: image ? 'auto' : '0.25rem',
+                width: image ? '83.333333%' : '40%',
+                margin: image ? 0 : '0.75rem auto 0',
+                position: image ? 'absolute' : 'relative',
+              }}
+              transition={{
+                duration: 0.8,
+                type: 'spring',
+              }}
+              className={`w-full inset-x-0 top-0 z-30 bg-white text-start overflow-hidden`}>
+              <motion.div
+                layout
+                initial={{ padding: '1.5rem', height: 'inherit' }}
+                className={`whitespace-nowrap`}
+              >
+                <h1 className='text-xl'>Creo que:</h1>
+                <div className='px-2'>
+                  <div className='-space-y-2'>
+                    <h2 className='text-lg'>Tipo de cultivo:</h2>
+                    <h2 className='text-lg text-primary'>Indoor</h2>
+                  </div>
+                  <div className='-space-y-1'>
+                    <h2 className='text-lg'>Calificación:</h2>
+                    <div className='flex gap-2 h-8'>
+                      {[...Array(6)].map((_, i) => (
+                        <Cannabis key={i} className={'text-primary w-8'} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
         </section>
         <section className='flex flex-col items-center justify-center min-h-[365px]'>
           <label onClick={() => setModal(!modal)}>
@@ -130,7 +153,6 @@ export default function Home() {
               zIndex: modal ? 30 : -1,
               overflow: modal ? 'visible' : 'hidden'
             }}
-            transition={{ delay: modal ? 0 : 0.3 }}
             className={`
             absolute inset-0
           `}
