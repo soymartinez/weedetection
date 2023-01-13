@@ -143,13 +143,14 @@ export default function Home() {
         <section className={`flex flex-col items-center relative ${image ? 'min-h-[465px] pt-32 justify-center' : 'min-h-[365px] justify-center'}`}>
           {preview ?
             <motion.div
+              onClick={() => setModal(true)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{
                 duration: 0.8,
                 type: 'spring',
               }}
-              className='flex flex-col items-center justify-center relative w-10/12'>
+              className='flex flex-col items-center justify-center cursor-pointer relative w-10/12'>
               <div className='absolute inset-y-5 z-20 rounded-full w-full h-1 bg-primary drop-shadow-[0_0_20px_#4cffa3] animate-scan-line' />
               <motion.img
                 initial={{ opacity: 0, height: 0 }}
@@ -204,7 +205,7 @@ export default function Home() {
               className={`
                 text-primary text-3xl py-4 font-black 
                 cursor-pointer z-10 
-                flex items-center justify-center 
+                ${image ? 'hidden' : 'flex'} items-center justify-center 
                 animate-pulse
               `}
             >
@@ -214,7 +215,7 @@ export default function Home() {
               animate={{ translateY: modal ? '0' : '100vh' }}
               transition={{ duration: 0.3, type: 'spring' }}
               className={`
-                bg-white px-4 pb-4 rounded-t-3xl 
+                ${image ? 'bg-primary' : 'bg-white'} px-4 pb-4 rounded-t-3xl 
                 w-full min-h-full
                 flex flex-col items-center
               `}
@@ -222,38 +223,74 @@ export default function Home() {
               <button onClick={() => setModal(false)} className='w-full py-4'>
                 <div className='bg-black h-1 w-2/5 rounded-full mx-auto' />
               </button>
-              <h3 className='text-center text-lg font-black'>Recomendaciones para que podamos dar una mejor respuesta</h3>
-              <ul className='list-outside list-disc ml-6 mt-4'>
-                <li className='text-md font-black'>La imagen debe ser clara y nítida.</li>
-                <li className='text-md font-black'>Contraste: la imagen debe tener un buen contraste entre la flor y el fondo.</li>
-                <li className='text-md font-black'>La imagen debe ser tomada con buena iluminación.</li>
-                <li className='text-md font-black'>La imagen debe estar enfocada.</li>
-                <li className='text-md font-black'>La imagen debe estar en formato .jpg o .png.</li>
-              </ul>
-              <h3 className='text-center text-lg font-black mt-6'>La foto debera ser algo asi</h3>
-              <div className='grid grid-cols-3 gap-1'>
-                <Image
-                  src={`/img1.png`}
-                  alt={`Weedetection`}
-                  width={120}
-                  height={120}
-                  className={'rounded-lg'}
-                />
-                <Image
-                  src={`/img2.png`}
-                  alt={`Weedetection`}
-                  width={120}
-                  height={120}
-                  className={'rounded-lg'}
-                />
-                <Image
-                  src={`/img3.png`}
-                  alt={`Weedetection`}
-                  width={120}
-                  height={120}
-                  className={'rounded-lg'}
-                />
-              </div>
+              {image ?
+                <>
+                  <h1 className='text-center text-3xl'>Hawaiian Haze</h1>
+                  <div className='text-base'>
+                    CON SU FUERTE PEGADA, LA
+                    HAWAIIAN HAZE ES UNA VARIEDAD
+                    IDEAL PARA CONSUMIDORES CON
+                    EXPERIENCIA. NO HAY MUCHOS
+                    FUMADORES NOVATOS QUE SEAN
+                    CAPACES DE LIDIAR CON SU 26% DE
+                    THC. AL SER UN HIBRIDO SATIVA
+                    DOMINANTE, SU EFECTO ES
+                    EDIFICANTE Y VIGORIZANTE. SI SE
+                    TOMA EN DOSIS PEQUEÑAS, SE PUEDE
+                    FUMAR A MEDIA MAÑANA, SOBRE
+                    TODO PARA APROVECHAR SU EFECTO
+                    CREATIVO Y LAS RISAS QUE GENERA.
+                    PUEDE PROVOCAR MAREOS, LO QUE
+                    ES UNA CONSECUENCIA DIRECTA DE
+                    SU POTENCIA. SIN EMBARGO, CUANDO
+                    SE CONSUME A UN RITMO
+                    TRANQUILO, SE ANULA LA MAYOR
+                    PARTE DE ESTE EFECTO. TAMBIÉN TE
+                    PERMITE EXPERIMENTAR SU AROMA
+                    TERROSO CON TOQUES DE LIMON Y
+                    PINO. SU CULTIVO ES MUY FÁCIL, Y
+                    NO NECESITA CUIDADOS ESPECIALES.
+                    EL ÚNICO INCONVENIENTE PARA LOS
+                    CULTIVADORES ES QUE LA HAWAIIAN
+                    HAZE SOLO PRODUCE COSECHAS
+                    MEDIANAS EN LA MAYORÍA DE
+                    ENTORNOS.
+                  </div>
+                </>
+                : <>
+                  <h1 className='text-center text-lg font-black'>Recomendaciones para que podamos dar una mejor respuesta</h1>
+                  <ul className='list-outside list-disc ml-6 mt-4'>
+                    <li className='text-md font-black'>La imagen debe ser clara y nítida.</li>
+                    <li className='text-md font-black'>Contraste: la imagen debe tener un buen contraste entre la flor y el fondo.</li>
+                    <li className='text-md font-black'>La imagen debe ser tomada con buena iluminación.</li>
+                    <li className='text-md font-black'>La imagen debe estar enfocada.</li>
+                    <li className='text-md font-black'>La imagen debe estar en formato .jpg o .png.</li>
+                  </ul>
+                  <h3 className='text-center text-lg font-black mt-6'>La foto debera ser algo asi</h3>
+                  <div className='grid grid-cols-3 gap-1'>
+                    <Image
+                      src={`/img1.png`}
+                      alt={`Weedetection`}
+                      width={120}
+                      height={120}
+                      className={'rounded-lg'}
+                    />
+                    <Image
+                      src={`/img2.png`}
+                      alt={`Weedetection`}
+                      width={120}
+                      height={120}
+                      className={'rounded-lg'}
+                    />
+                    <Image
+                      src={`/img3.png`}
+                      alt={`Weedetection`}
+                      width={120}
+                      height={120}
+                      className={'rounded-lg'}
+                    />
+                  </div>
+                </>}
             </motion.div>
           </motion.section>
         </AnimatePresence>
