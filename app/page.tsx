@@ -149,7 +149,7 @@ export default function Home() {
                 duration: 0.8,
                 type: 'spring',
               }}
-              className='flex flex-col items-center justify-center relative w-4/6'>
+              className='flex flex-col items-center justify-center relative w-10/12'>
               <div className='absolute inset-y-5 z-20 rounded-full w-full h-1 bg-primary drop-shadow-[0_0_20px_#4cffa3] animate-scan-line' />
               <motion.img
                 initial={{ opacity: 0, height: 0 }}
@@ -158,8 +158,8 @@ export default function Home() {
                   duration: 0.8,
                   type: 'spring',
                 }}
-                className={`w-4/5 py-4 object-contain grayscale`} src={preview} />
-              <div className='absolute w-4/5 top-0 overflow-hidden animate-scan'>
+                className={`w-5/6 py-4 object-contain grayscale`} src={preview} />
+              <div className='absolute w-5/6 top-0 overflow-hidden animate-scan'>
                 <motion.img
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: '300px' }}
