@@ -186,9 +186,8 @@ export default function Home() {
               zIndex: modal ? 30 : -1,
               overflow: modal ? 'visible' : 'hidden'
             }}
-            className={`
-            absolute inset-0
-          `}
+            transition={{ delay: modal ? 0 : 0.3 }}
+            className={`absolute inset-0`}
           >
             <motion.div
               animate={{
