@@ -215,56 +215,63 @@ export default function Home() {
           >
             Continuar <Arrow className='w-6' />
           </motion.label>
-          <motion.div
-            animate={{ translateY: modalOne ? 0 : image ? '100vh' : 'calc(100vh - 110px)' }}
-            transition={{ duration: 0.3, type: 'spring' }}
-            className={`
+          <AnimatePresence>
+            {!image &&
+              <motion.div
+                layout
+                initial={{ translateY: '100vh' }}
+                animate={{ translateY: modalOne ? 0 : 'calc(100vh - 110px)' }}
+                exit={{ translateY: '100vh' }}
+                transition={{ duration: 0.5, type: 'spring', damping: 38, stiffness: 700 }}
+                className={`
                                 bg-white px-4 rounded-t-3xl 
                                 w-full h-full
                                 flex flex-col items-center
                             `}
-          >
-            <button onClick={() => setModalOne(!modalOne)} className='w-full'>
-              <div className={`${modalOne ? '' : 'hidden'} bg-black h-1 w-32 my-4 rounded-full mx-auto`} />
-              <h1 className={`${modalOne ? 'hidden' : ''} uppercase text-xl py-2`}>La cara del cannabis</h1>
-            </button>
-            <div className='pb-4 h-full overflow-hidden'>
-              <div className='flex flex-col items-center w-full h-full overflow-y-auto'>
-                <h1 className='text-center text-lg font-black'>Recomendaciones para que podamos dar una mejor respuesta</h1>
-                <ul className='list-outside list-disc ml-6 mt-4'>
-                  <li className='text-md font-black'>La imagen debe ser clara y nítida.</li>
-                  <li className='text-md font-black'>Contraste: la imagen debe tener un buen contraste entre la flor y el fondo.</li>
-                  <li className='text-md font-black'>La imagen debe ser tomada con buena iluminación.</li>
-                  <li className='text-md font-black'>La imagen debe estar enfocada.</li>
-                  <li className='text-md font-black'>La imagen debe estar en formato .jpg o .png.</li>
-                </ul>
-                <h3 className='text-center text-lg font-black mt-6'>La foto debera ser algo asi</h3>
-                <div className='grid grid-cols-3 gap-1'>
-                  <Image
-                    src={`/img1.png`}
-                    alt={`Weedetection`}
-                    width={120}
-                    height={120}
-                    className={'rounded-lg'}
-                  />
-                  <Image
-                    src={`/img2.png`}
-                    alt={`Weedetection`}
-                    width={120}
-                    height={120}
-                    className={'rounded-lg'}
-                  />
-                  <Image
-                    src={`/img3.png`}
-                    alt={`Weedetection`}
-                    width={120}
-                    height={120}
-                    className={'rounded-lg'}
-                  />
+              >
+                <button onClick={() => setModalOne(!modalOne)} className='w-full'>
+                  <div className={`${modalOne ? '' : 'hidden'} bg-black h-1 w-32 my-4 rounded-full mx-auto`} />
+                  <h1 className={`${modalOne ? 'hidden' : ''} uppercase text-xl py-2`}>La cara del cannabis</h1>
+                </button>
+                <div className='pb-4 h-full overflow-hidden'>
+                  <div className='flex flex-col items-center w-full h-full overflow-y-auto'>
+                    <h1 className='text-center text-lg font-black'>Recomendaciones para que podamos dar una mejor respuesta</h1>
+                    <ul className='list-outside list-disc ml-6 mt-4'>
+                      <li className='text-md font-black'>La imagen debe ser clara y nítida.</li>
+                      <li className='text-md font-black'>Contraste: la imagen debe tener un buen contraste entre la flor y el fondo.</li>
+                      <li className='text-md font-black'>La imagen debe ser tomada con buena iluminación.</li>
+                      <li className='text-md font-black'>La imagen debe estar enfocada.</li>
+                      <li className='text-md font-black'>La imagen debe estar en formato .jpg o .png.</li>
+                    </ul>
+                    <h3 className='text-center text-lg font-black mt-6'>La foto debera ser algo asi</h3>
+                    <div className='grid grid-cols-3 gap-1'>
+                      <Image
+                        src={`/img1.png`}
+                        alt={`Weedetection`}
+                        width={120}
+                        height={120}
+                        className={'rounded-lg'}
+                      />
+                      <Image
+                        src={`/img2.png`}
+                        alt={`Weedetection`}
+                        width={120}
+                        height={120}
+                        className={'rounded-lg'}
+                      />
+                      <Image
+                        src={`/img3.png`}
+                        alt={`Weedetection`}
+                        width={120}
+                        height={120}
+                        className={'rounded-lg'}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            }
+          </AnimatePresence>
         </motion.section>
       </AnimatePresence>
       <AnimatePresence initial={true}>
