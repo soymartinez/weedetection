@@ -297,7 +297,7 @@ export default function Home() {
               style={{ y: '-80px', height: '100vh' }}
               animate={{ y: modalTwo ? '-100vh' : '-80px' }}
               exit={{ y: '0' }}
-              transition={{ duration: 4.3, type: 'spring' }}
+              transition={{ duration: 0.3, type: 'spring' }}
               className={`
                                 bg-primary px-4 rounded-t-3xl 
                                 w-full
