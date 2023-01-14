@@ -222,9 +222,9 @@ export default function Home() {
               <motion.div
                 layout
                 key={'slideOne'}
-                initial={{ translateY: '100vh' }}
+                initial={{ translateY: 'calc(100vh - 110px)' }}
                 animate={{ translateY: modalOne ? 0 : 'calc(100vh - 110px)' }}
-                exit={{ translateY: '100vh' }}
+                exit={{ translateY: 'calc(100vh - 110px)' }}
                 transition={{ duration: 0.5, type: 'spring', damping: 38, stiffness: 700 }}
                 className={`
                                 bg-white px-4 rounded-t-3xl 
@@ -277,90 +277,93 @@ export default function Home() {
           </AnimatePresence>
         </motion.section>
       </AnimatePresence>
-      <AnimatePresence initial={true}>
-        <motion.section
-          key={'sectionTwo'}
-          animate={{
-            zIndex: modalTwo ? 30 : -1,
-            overflow: 'hidden'
-          }}
-          transition={{ delay: modalTwo ? 0 : 0.3 }}
-          className={`absolute inset-0`}
-        >
-          <motion.div
-            key={'bgTwo'}
+      <AnimatePresence initial={false}>
+        {image &&
+          <motion.section
+            key={'sectionTwo'}
+            initial={false}
             animate={{
-              opacity: modalTwo ? 1 : 0,
-              zIndex: modalTwo ? 0 : -1,
+              zIndex: modalTwo ? 30 : -1,
+              overflow: 'hidden'
             }}
-            transition={{ duration: 0.3 }}
-            className={`bg-black/80 absolute inset-0`}
-          />
-          <AnimatePresence>
-            {preview &&
-              <motion.div
-                layout
-                key={'slideTwo'}
-                initial={{ translateY: '100vh' }}
-                animate={{ translateY: modalTwo ? 0 : 'calc(100vh - 80px)' }}
-                exit={{ translateY: '100vh' }}
-                transition={{ duration: 0.0, type: 'spring', damping: 38, stiffness: 700 }}
-                className={`
+            transition={{ delay: modalTwo ? 0 : 0.3 }}
+            className={`absolute inset-0`}
+          >
+            <motion.div
+              key={'bgTwo'}
+              animate={{
+                opacity: modalTwo ? 1 : 0,
+                zIndex: modalTwo ? 0 : -1,
+              }}
+              transition={{ duration: 0.3 }}
+              className={`bg-black/80 absolute inset-0`}
+            />
+            <AnimatePresence>
+              {preview &&
+                <motion.div
+                  layout
+                  key={'slideTwo'}
+                  initial={{ translateY: 'calc(100vh - 80px)' }}
+                  animate={{ translateY: modalTwo ? 0 : 'calc(100vh - 80px)' }}
+                  exit={{ translateY: 'calc(100vh - 80px)' }}
+                  transition={{ duration: 0.0, type: 'spring', damping: 38, stiffness: 700 }}
+                  className={`
                                 bg-primary px-4 rounded-t-3xl 
                                 w-full h-full
                                 flex flex-col items-center
                             `}
-              >
-                <button onClick={() => setModalTwo(!modalTwo)} className='w-full py-4'>
-                  <div className={`bg-white h-1 w-32 rounded-full mx-auto`} />
-                  <h1 className='uppercase text-center text-3xl mt-2'>Hawaiian Haze</h1>
-                </button>
-                <div className='h-full overflow-y-auto'>
-                  CON SU FUERTE PEGADA, LA
-                  HAWAIIAN HAZE ES UNA VARIEDAD
-                  IDEAL PARA CONSUMIDORES CON
-                  EXPERIENCIA. NO HAY MUCHOS
-                  FUMADORES NOVATOS QUE SEAN
-                  CAPACES DE LIDIAR CON SU 26% DE
-                  THC. AL SER UN HIBRIDO SATIVA
-                  DOMINANTE, SU EFECTO ES
-                  EDIFICANTE Y VIGORIZANTE. SI SE
-                  TOMA EN DOSIS PEQUEÑAS, SE PUEDE
-                  FUMAR A MEDIA MAÑANA, SOBRE
-                  TODO PARA APROVECHAR SU EFECTO
-                  CREATIVO Y LAS RISAS QUE GENERA.
-                  PUEDE PROVOCAR MAREOS, LO QUE
-                  ES UNA CONSECUENCIA DIRECTA DE
-                  SU POTENCIA. SIN EMBARGO, CUANDO
-                  SE CONSUME A UN RITMO
-                  TRANQUILO, SE ANULA LA MAYOR
-                  PARTE DE ESTE EFECTO. TAMBIÉN TE
-                  PERMITE EXPERIMENTAR SU AROMA
-                  TERROSO CON TOQUES DE LIMON Y
-                  PINO. SU CULTIVO ES MUY FÁCIL, Y
-                  NO NECESITA CUIDADOS ESPECIALES.
-                  EL ÚNICO INCONVENIENTE PARA LOS
-                  CULTIVADORES ES QUE LA HAWAIIAN
-                  HAZE SOLO PRODUCE COSECHAS
-                  MEDIANAS EN LA MAYORÍA DE
-                  ENTORNOS.
+                >
+                  <button onClick={() => setModalTwo(!modalTwo)} className='w-full py-4'>
+                    <div className={`bg-white h-1 w-32 rounded-full mx-auto`} />
+                    <h1 className='uppercase text-center text-3xl mt-2'>Hawaiian Haze</h1>
+                  </button>
+                  <div className='h-full overflow-y-auto'>
+                    CON SU FUERTE PEGADA, LA
+                    HAWAIIAN HAZE ES UNA VARIEDAD
+                    IDEAL PARA CONSUMIDORES CON
+                    EXPERIENCIA. NO HAY MUCHOS
+                    FUMADORES NOVATOS QUE SEAN
+                    CAPACES DE LIDIAR CON SU 26% DE
+                    THC. AL SER UN HIBRIDO SATIVA
+                    DOMINANTE, SU EFECTO ES
+                    EDIFICANTE Y VIGORIZANTE. SI SE
+                    TOMA EN DOSIS PEQUEÑAS, SE PUEDE
+                    FUMAR A MEDIA MAÑANA, SOBRE
+                    TODO PARA APROVECHAR SU EFECTO
+                    CREATIVO Y LAS RISAS QUE GENERA.
+                    PUEDE PROVOCAR MAREOS, LO QUE
+                    ES UNA CONSECUENCIA DIRECTA DE
+                    SU POTENCIA. SIN EMBARGO, CUANDO
+                    SE CONSUME A UN RITMO
+                    TRANQUILO, SE ANULA LA MAYOR
+                    PARTE DE ESTE EFECTO. TAMBIÉN TE
+                    PERMITE EXPERIMENTAR SU AROMA
+                    TERROSO CON TOQUES DE LIMON Y
+                    PINO. SU CULTIVO ES MUY FÁCIL, Y
+                    NO NECESITA CUIDADOS ESPECIALES.
+                    EL ÚNICO INCONVENIENTE PARA LOS
+                    CULTIVADORES ES QUE LA HAWAIIAN
+                    HAZE SOLO PRODUCE COSECHAS
+                    MEDIANAS EN LA MAYORÍA DE
+                    ENTORNOS.
 
-                  PINO. SU CULTIVO ES MUY FÁCIL, Y
-                  NO NECESITA CUIDADOS ESPECIALES.
-                  EL ÚNICO INCONVENIENTE PARA LOS
-                  CULTIVADORES ES QUE LA HAWAIIAN
-                  HAZE SOLO PRODUCE COSECHAS
-                  MEDIANAS EN LA MAYORÍA DE
-                  ENTORNOS.
-                </div>
-                <button className='flex items-center justify-center gap-2 w-full text-white py-4 animate-pulse' onClick={handleHome}>
-                  <HomeIcon className='w-8' />
-                  <h1 className='text-center text-4xl mt-2 uppercase'>inicio</h1>
-                </button>
-              </motion.div>
-            }
-          </AnimatePresence>
-        </motion.section>
+                    PINO. SU CULTIVO ES MUY FÁCIL, Y
+                    NO NECESITA CUIDADOS ESPECIALES.
+                    EL ÚNICO INCONVENIENTE PARA LOS
+                    CULTIVADORES ES QUE LA HAWAIIAN
+                    HAZE SOLO PRODUCE COSECHAS
+                    MEDIANAS EN LA MAYORÍA DE
+                    ENTORNOS.
+                  </div>
+                  <button className='flex items-center justify-center gap-2 w-full text-white py-4 animate-pulse' onClick={handleHome}>
+                    <HomeIcon className='w-8' />
+                    <h1 className='text-center text-4xl mt-2 uppercase'>inicio</h1>
+                  </button>
+                </motion.div>
+              }
+            </AnimatePresence>
+          </motion.section>
+        }
       </AnimatePresence>
     </main >
   )
