@@ -2,12 +2,13 @@
 
 import Image from 'next/image'
 import { Camera, Arrow, Cannabis, HomeIcon } from 'components/icons'
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import Slide from 'components/slide'
 
 export default function Home() {
-  const [modal, setModal] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const [modalOne, setModalOne] = useState(false)
+  const [modalTwo, setModalTwo] = useState(false)
   const [image, setImage] = useState(null)
   const [preview, setPreview] = useState('')
 
@@ -15,13 +16,13 @@ export default function Home() {
     const file = e.target.files[0]
     setImage(file)
     setPreview(URL.createObjectURL(file))
-    setModal(false)
+    setModalOne(false)
   }
 
   const handleHome = () => {
     setImage(null)
     setPreview('')
-    setIsOpen(false)
+    setModalTwo(false)
   }
 
   return (
@@ -148,7 +149,7 @@ export default function Home() {
       <section className={`flex flex-col items-center relative ${image ? 'min-h-[465px] pt-32 justify-center' : 'min-h-[365px] justify-center'}`}>
         {preview ?
           <motion.div
-            onClick={() => setIsOpen(true)}
+            onClick={() => setModalTwo(true)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -177,7 +178,7 @@ export default function Home() {
             </div>
           </motion.div>
           : <>
-            <label onClick={() => setModal(true)}>
+            <label onClick={() => setModalOne(true)}>
               <Camera className='text-white w-28 md:w-48 cursor-pointer' />
             </label>
             <input hidden onChange={(e) => handleImage(e)} type={'file'} accept={'.png, .jpg, .jpeg'} id='upload' />
@@ -186,6 +187,172 @@ export default function Home() {
         }
       </section>
       <AnimatePresence initial={false}>
+        <motion.section
+          animate={{
+            zIndex: modalOne ? 30 : -1,
+            overflow: 'hidden'
+          }}
+          transition={{ delay: modalOne ? 0 : 0.3 }}
+          className={`absolute inset-0`}
+        >
+          <motion.div
+            animate={{
+              opacity: modalOne ? 1 : 0,
+              zIndex: modalOne ? 0 : -1,
+            }}
+            transition={{ duration: 0.3 }}
+            className={`bg-black/80 absolute inset-0`}
+          />
+          <motion.label
+            animate={{ translateY: modalOne ? '0' : '-100%' }}
+            transition={{ duration: 0.3, type: 'spring' }}
+            htmlFor='upload'
+            className={`
+                        text-primary text-3xl py-4 font-black 
+                        cursor-pointer z-10 
+                        flex items-center justify-center 
+                        animate-pulse
+                    `}
+          >
+            Continuar <Arrow className='w-6' />
+          </motion.label>
+          <motion.div
+            animate={{ translateY: modalOne ? 0 : image ? '100vh' : 'calc(100vh - 110px)' }}
+            transition={{ duration: 0.3, type: 'spring' }}
+            className={`
+                                bg-white px-4 rounded-t-3xl 
+                                w-full h-full
+                                flex flex-col items-center
+                            `}
+          >
+            <button onClick={() => setModalOne(!modalOne)} className='w-full'>
+              <div className={`${modalOne ? '' : 'hidden'} bg-black h-1 w-32 my-4 rounded-full mx-auto`} />
+              <h1 className={`${modalOne ? 'hidden' : ''} uppercase text-xl py-2`}>La cara del cannabis</h1>
+            </button>
+            <div className='pb-4 h-full overflow-hidden'>
+              <div className='flex flex-col items-center w-full h-full overflow-y-auto'>
+                <h1 className='text-center text-lg font-black'>Recomendaciones para que podamos dar una mejor respuesta</h1>
+                <ul className='list-outside list-disc ml-6 mt-4'>
+                  <li className='text-md font-black'>La imagen debe ser clara y nítida.</li>
+                  <li className='text-md font-black'>Contraste: la imagen debe tener un buen contraste entre la flor y el fondo.</li>
+                  <li className='text-md font-black'>La imagen debe ser tomada con buena iluminación.</li>
+                  <li className='text-md font-black'>La imagen debe estar enfocada.</li>
+                  <li className='text-md font-black'>La imagen debe estar en formato .jpg o .png.</li>
+                </ul>
+                <h3 className='text-center text-lg font-black mt-6'>La foto debera ser algo asi</h3>
+                <div className='grid grid-cols-3 gap-1'>
+                  <Image
+                    src={`/img1.png`}
+                    alt={`Weedetection`}
+                    width={120}
+                    height={120}
+                    className={'rounded-lg'}
+                  />
+                  <Image
+                    src={`/img2.png`}
+                    alt={`Weedetection`}
+                    width={120}
+                    height={120}
+                    className={'rounded-lg'}
+                  />
+                  <Image
+                    src={`/img3.png`}
+                    alt={`Weedetection`}
+                    width={120}
+                    height={120}
+                    className={'rounded-lg'}
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.section>
+      </AnimatePresence>
+      <AnimatePresence initial={false}>
+        <motion.section
+          animate={{
+            zIndex: modalOne ? 30 : -1,
+            overflow: 'hidden'
+          }}
+          transition={{ delay: modalOne ? 0 : 0.3 }}
+          className={`absolute inset-0`}
+        >
+          <motion.div
+            animate={{
+              opacity: modalOne ? 1 : 0,
+              zIndex: modalOne ? 0 : -1,
+            }}
+            transition={{ duration: 0.3 }}
+            className={`bg-black/80 absolute inset-0`}
+          />
+          <motion.label
+            animate={{ translateY: modalOne ? '0' : '-100%' }}
+            transition={{ duration: 0.3, type: 'spring' }}
+            htmlFor='upload'
+            className={`
+                        text-primary text-3xl py-4 font-black 
+                        cursor-pointer z-10 
+                        flex items-center justify-center 
+                        animate-pulse
+                    `}
+          >
+            Continuar <Arrow className='w-6' />
+          </motion.label>
+          <motion.div
+            animate={{ translateY: modalOne ? 0 : image ? 'calc(100vh - 110px)' : '100vh' }}
+            transition={{ duration: 0.3, type: 'spring' }}
+            className={`
+                                bg-white px-4 rounded-t-3xl 
+                                w-full h-full
+                                flex flex-col items-center
+                            `}
+          >
+            <div className='h-full overflow-y-auto'>
+              CON SU FUERTE PEGADA, LA
+              HAWAIIAN HAZE ES UNA VARIEDAD
+              IDEAL PARA CONSUMIDORES CON
+              EXPERIENCIA. NO HAY MUCHOS
+              FUMADORES NOVATOS QUE SEAN
+              CAPACES DE LIDIAR CON SU 26% DE
+              THC. AL SER UN HIBRIDO SATIVA
+              DOMINANTE, SU EFECTO ES
+              EDIFICANTE Y VIGORIZANTE. SI SE
+              TOMA EN DOSIS PEQUEÑAS, SE PUEDE
+              FUMAR A MEDIA MAÑANA, SOBRE
+              TODO PARA APROVECHAR SU EFECTO
+              CREATIVO Y LAS RISAS QUE GENERA.
+              PUEDE PROVOCAR MAREOS, LO QUE
+              ES UNA CONSECUENCIA DIRECTA DE
+              SU POTENCIA. SIN EMBARGO, CUANDO
+              SE CONSUME A UN RITMO
+              TRANQUILO, SE ANULA LA MAYOR
+              PARTE DE ESTE EFECTO. TAMBIÉN TE
+              PERMITE EXPERIMENTAR SU AROMA
+              TERROSO CON TOQUES DE LIMON Y
+              PINO. SU CULTIVO ES MUY FÁCIL, Y
+              NO NECESITA CUIDADOS ESPECIALES.
+              EL ÚNICO INCONVENIENTE PARA LOS
+              CULTIVADORES ES QUE LA HAWAIIAN
+              HAZE SOLO PRODUCE COSECHAS
+              MEDIANAS EN LA MAYORÍA DE
+              ENTORNOS.
+
+              PINO. SU CULTIVO ES MUY FÁCIL, Y
+              NO NECESITA CUIDADOS ESPECIALES.
+              EL ÚNICO INCONVENIENTE PARA LOS
+              CULTIVADORES ES QUE LA HAWAIIAN
+              HAZE SOLO PRODUCE COSECHAS
+              MEDIANAS EN LA MAYORÍA DE
+              ENTORNOS.
+            </div>
+            <button className='flex items-center justify-center gap-2 w-full text-white py-4 animate-pulse' onClick={handleHome}>
+              <HomeIcon className='w-8' />
+              <h1 className='text-center text-4xl mt-2 uppercase'>inicio</h1>
+            </button>
+          </motion.div>
+        </motion.section>
+      </AnimatePresence>
+      {/* <AnimatePresence initial={false}>
         <motion.section
           animate={{
             zIndex: modal ? 30 : -1,
@@ -261,74 +428,103 @@ export default function Home() {
             </div>
           </motion.div>
         </motion.section>
-      </AnimatePresence>
-      <AnimatePresence initial={false}>
-        <motion.section
-          animate={{
-            zIndex: isOpen ? 30 : -1,
-            overflow: 'hidden'
-          }}
-          transition={{ delay: isOpen ? 0 : 0.3 }}
-          className={`absolute inset-0`}
+      </AnimatePresence> */}
+
+      {/* {!image &&
+        <Slide
+          setOpen={setModal}
+          height={120}
+          topButton
+          background='bg-white'
+          lineButton={modal}
+          textButton='la cara del cannabis'
+          textButtonClassName='text-xl uppercase'
         >
-          <motion.div
-            animate={{
-              opacity: isOpen ? 1 : 0,
-              zIndex: isOpen ? 0 : -1,
-            }}
-            transition={{ duration: 0.3 }}
-            className={`bg-black/80 absolute inset-0`}
-          />
-          <motion.div
-            animate={{ translateY: isOpen ? '0' : '100vh' }}
-            transition={{ duration: 0.3, type: 'spring' }}
-            className={`
-              bg-primary px-4 rounded-t-3xl 
-                w-full h-full
-                flex flex-col items-center
-              `}
-          >
-            <button onClick={() => setIsOpen(false)} className='w-full py-4'>
-              <div className='bg-white h-1 w-2/5 rounded-full mx-auto' />
-              <h1 className='text-center text-3xl mt-2 uppercase'>Hawaiian Haze</h1>
-            </button>
-            <div className='text-base h-full overflow-auto'>
-              CON SU FUERTE PEGADA, LA
-              HAWAIIAN HAZE ES UNA VARIEDAD
-              IDEAL PARA CONSUMIDORES CON
-              EXPERIENCIA. NO HAY MUCHOS
-              FUMADORES NOVATOS QUE SEAN
-              CAPACES DE LIDIAR CON SU 26% DE
-              THC. AL SER UN HIBRIDO SATIVA
-              DOMINANTE, SU EFECTO ES
-              EDIFICANTE Y VIGORIZANTE. SI SE
-              TOMA EN DOSIS PEQUEÑAS, SE PUEDE
-              FUMAR A MEDIA MAÑANA, SOBRE
-              TODO PARA APROVECHAR SU EFECTO
-              CREATIVO Y LAS RISAS QUE GENERA.
-              PUEDE PROVOCAR MAREOS, LO QUE
-              ES UNA CONSECUENCIA DIRECTA DE
-              SU POTENCIA. SIN EMBARGO, CUANDO
-              SE CONSUME A UN RITMO
-              TRANQUILO, SE ANULA LA MAYOR
-              PARTE DE ESTE EFECTO. TAMBIÉN TE
-              PERMITE EXPERIMENTAR SU AROMA
-              TERROSO CON TOQUES DE LIMON Y
-              PINO. SU CULTIVO ES MUY FÁCIL, Y
-              NO NECESITA CUIDADOS ESPECIALES.
-              EL ÚNICO INCONVENIENTE PARA LOS
-              CULTIVADORES ES QUE LA HAWAIIAN
-              HAZE SOLO PRODUCE COSECHAS
-              MEDIANAS EN LA MAYORÍA DE
-              ENTORNOS.
+          <div className='pb-4 h-full overflow-hidden'>
+            <div className='flex flex-col items-center w-full h-full overflow-y-auto'>
+              <h1 className='text-center text-lg font-black'>Recomendaciones para que podamos dar una mejor respuesta</h1>
+              <ul className='list-outside list-disc ml-6 mt-4'>
+                <li className='text-md font-black'>La imagen debe ser clara y nítida.</li>
+                <li className='text-md font-black'>Contraste: la imagen debe tener un buen contraste entre la flor y el fondo.</li>
+                <li className='text-md font-black'>La imagen debe ser tomada con buena iluminación.</li>
+                <li className='text-md font-black'>La imagen debe estar enfocada.</li>
+                <li className='text-md font-black'>La imagen debe estar en formato .jpg o .png.</li>
+              </ul>
+              <h3 className='text-center text-lg font-black mt-6'>La foto debera ser algo asi</h3>
+              <div className='grid grid-cols-3 gap-1'>
+                <Image
+                  src={`/img1.png`}
+                  alt={`Weedetection`}
+                  width={120}
+                  height={120}
+                  className={'rounded-lg'}
+                />
+                <Image
+                  src={`/img2.png`}
+                  alt={`Weedetection`}
+                  width={120}
+                  height={120}
+                  className={'rounded-lg'}
+                />
+                <Image
+                  src={`/img3.png`}
+                  alt={`Weedetection`}
+                  width={120}
+                  height={120}
+                  className={'rounded-lg'}
+                />
+              </div>
             </div>
-            <button className='flex items-center justify-center gap-2 w-full text-white py-4' onClick={handleHome}>
-              <HomeIcon className='w-8' />
-              <h1 className='text-center text-4xl mt-2 uppercase'>inicio</h1>
-            </button>
-          </motion.div>
-        </motion.section>
-      </AnimatePresence>
+          </div>
+        </Slide>
+      } */}
+
+      {/* {image &&
+        <Slide setOpen={setIsOpen} textButton='Hawaiian Haze'>
+          <div className='h-full overflow-y-auto'>
+            CON SU FUERTE PEGADA, LA
+            HAWAIIAN HAZE ES UNA VARIEDAD
+            IDEAL PARA CONSUMIDORES CON
+            EXPERIENCIA. NO HAY MUCHOS
+            FUMADORES NOVATOS QUE SEAN
+            CAPACES DE LIDIAR CON SU 26% DE
+            THC. AL SER UN HIBRIDO SATIVA
+            DOMINANTE, SU EFECTO ES
+            EDIFICANTE Y VIGORIZANTE. SI SE
+            TOMA EN DOSIS PEQUEÑAS, SE PUEDE
+            FUMAR A MEDIA MAÑANA, SOBRE
+            TODO PARA APROVECHAR SU EFECTO
+            CREATIVO Y LAS RISAS QUE GENERA.
+            PUEDE PROVOCAR MAREOS, LO QUE
+            ES UNA CONSECUENCIA DIRECTA DE
+            SU POTENCIA. SIN EMBARGO, CUANDO
+            SE CONSUME A UN RITMO
+            TRANQUILO, SE ANULA LA MAYOR
+            PARTE DE ESTE EFECTO. TAMBIÉN TE
+            PERMITE EXPERIMENTAR SU AROMA
+            TERROSO CON TOQUES DE LIMON Y
+            PINO. SU CULTIVO ES MUY FÁCIL, Y
+            NO NECESITA CUIDADOS ESPECIALES.
+            EL ÚNICO INCONVENIENTE PARA LOS
+            CULTIVADORES ES QUE LA HAWAIIAN
+            HAZE SOLO PRODUCE COSECHAS
+            MEDIANAS EN LA MAYORÍA DE
+            ENTORNOS.
+
+            PINO. SU CULTIVO ES MUY FÁCIL, Y
+            NO NECESITA CUIDADOS ESPECIALES.
+            EL ÚNICO INCONVENIENTE PARA LOS
+            CULTIVADORES ES QUE LA HAWAIIAN
+            HAZE SOLO PRODUCE COSECHAS
+            MEDIANAS EN LA MAYORÍA DE
+            ENTORNOS.
+          </div>
+          <button className='flex items-center justify-center gap-2 w-full text-white py-4 animate-pulse' onClick={handleHome}>
+            <HomeIcon className='w-8' />
+            <h1 className='text-center text-4xl mt-2 uppercase'>inicio</h1>
+          </button>
+        </Slide>
+      } */}
     </main >
   )
 }
