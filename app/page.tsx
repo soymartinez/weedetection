@@ -187,6 +187,7 @@ export default function Home() {
       </section>
       <AnimatePresence initial={false}>
         <motion.section
+          key={'sectionOne'}
           animate={{
             zIndex: modalOne ? 30 : -1,
             overflow: 'hidden'
@@ -195,6 +196,7 @@ export default function Home() {
           className={`absolute inset-0`}
         >
           <motion.div
+            key={'bgOne'}
             animate={{
               opacity: modalOne ? 1 : 0,
               zIndex: modalOne ? 0 : -1,
@@ -219,6 +221,7 @@ export default function Home() {
             {!image &&
               <motion.div
                 layout
+                key={'slideOne'}
                 initial={{ translateY: '100vh' }}
                 animate={{ translateY: modalOne ? 0 : 'calc(100vh - 110px)' }}
                 exit={{ translateY: '100vh' }}
@@ -276,6 +279,7 @@ export default function Home() {
       </AnimatePresence>
       <AnimatePresence initial={true}>
         <motion.section
+          key={'sectionTwo'}
           animate={{
             zIndex: modalTwo ? 30 : -1,
             overflow: 'hidden'
@@ -284,6 +288,7 @@ export default function Home() {
           className={`absolute inset-0`}
         >
           <motion.div
+            key={'bgTwo'}
             animate={{
               opacity: modalTwo ? 1 : 0,
               zIndex: modalTwo ? 0 : -1,
@@ -295,6 +300,7 @@ export default function Home() {
             {preview &&
               <motion.div
                 layout
+                key={'slideTwo'}
                 initial={{ translateY: '100vh' }}
                 animate={{ translateY: modalTwo ? 0 : 'calc(100vh - 80px)' }}
                 exit={{ translateY: '100vh' }}
